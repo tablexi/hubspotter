@@ -6,11 +6,11 @@ require 'hubspotter/version'
 Gem::Specification.new do |spec|
   spec.name          = "hubspotter"
   spec.version       = Hubspotter::VERSION
-  spec.authors       = ["John Gore"]
-  spec.email         = ["john@tablexi.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.authors       = ["Table XI"]
+  spec.email         = ["support@tablexi.com"]
+  spec.summary       = %q{HubSpot API integration.}
+  spec.description   = %q{Integrate HubSpot API support into your application.}
+  spec.homepage      = "https://github.com/tablexi/hubspotter"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
