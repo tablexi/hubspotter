@@ -15,9 +15,11 @@ taking your marketing to a new, if somewhat creepy, level.
 
 ## Todo
 
-* Add contact create support
-* Add contact update support
-* Add form support
+* Contact.create
+* Contact.update
+* Form.create
+* Form.update
+* Contact.all pagination support
 
 
 ## Installation
