@@ -5,20 +5,20 @@ require "hubspotter/response"
 
 module Hubspotter
   class Request
-    attr_accessor :parameters, :path, :method
+    attr_accessor :method, :path, :post_body, :url_params
     attr_reader   :response
 
     HOST = "https://api.hubapi.com"
 
-    def initialize(path, method, params = {})
-      @path       = path
+    def initialize(path, method, url_params: {}, post_body: nil)
       self.method = method
-      @parameters = params
+      @path       = path
+      @url_params = url_params
+      @post_body  = post_body
     end
 
     def send
-      request = get? ? get_request : post_request
-      http_response = http.request(request)
+      http_response = get? ? request_get : request_post
       raise_errors(http_response)
       @response = Response.new(http_response)
     end
@@ -47,31 +47,31 @@ module Hubspotter
       method.to_s.downcase == "get"
     end
 
-    def get_request
-      Net::HTTP::Get.new(uri(paramaters_with_api_key))
-    end
-
-    def paramaters_with_api_key
-      parameters.merge({ hapikey: Hubspotter.configuration.api_key })
-    end
-
-    def post_request
-      request = Net::HTTP::Post.new(uri)
-      request.set_form_data(paramaters_with_api_key)
-      request
-    end
-
     def raise_errors(http_response)
       case http_response.code
-      when "200"
-      when "202"
       when "401"
         raise AuthorizationError
       when "404"
         raise InvalidPath
-      else
+      when "405"
+        raise InvalidMethod
+      when http_response.code.match(/^50\d$/)
         raise ConnectionError
       end
+    end
+
+    def request_get
+      request = Net::HTTP::Get.new(uri(url_params_with_hapikey))
+      http.request(request)
+    end
+
+    def request_post
+      request = Net::HTTP::Post.new(uri(url_params_with_hapikey))
+      http.request(request, post_body)
+    end
+
+    def url_params_with_hapikey
+      url_params.merge({ hapikey: Hubspotter.configuration.api_key })
     end
 
     def uri(param_hash = nil)

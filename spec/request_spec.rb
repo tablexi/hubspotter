@@ -1,13 +1,17 @@
 require "spec_helper"
-require "hubspotter/request"
 require "hubspotter/exception"
+require "hubspotter/request"
 
 describe Hubspotter::Request do
   describe "class method" do
     describe "#initialize" do
 
       let(:request) do
-        Hubspotter::Request.new('/path', :get, { key: 'value' })
+        Hubspotter::Request.new(
+          '/path',
+          :get,
+          url_params: { key: 'value' },
+          post_body: 'body')
       end
 
       it "sets path" do
@@ -18,8 +22,12 @@ describe Hubspotter::Request do
         expect(request.method).to eq(:get)
       end
 
-      it "sets parameters" do
-        expect(request.parameters).to eq({ key: 'value' })
+      it "sets url_params" do
+        expect(request.url_params).to eq({ key: 'value' })
+      end
+
+      it "sets post_body" do
+        expect(request.post_body).to eq('body' )
       end
     end
   end

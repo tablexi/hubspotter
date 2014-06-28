@@ -1,5 +1,6 @@
 require "spec_helper"
 require "hubspotter/contact"
+require "hubspotter/exception"
 
 describe Hubspotter::Contact do
   before(:all) do
@@ -15,6 +16,32 @@ describe Hubspotter::Contact do
       it "returns an array of contacts" do
         VCR.use_cassette('contact-all') do
           expect(contacts.count).to eq(20)
+        end
+      end
+    end
+  end
+
+  describe "instance methods" do
+    describe ".create" do
+      it "creates a new contact" do
+        VCR.use_cassette('contact-create') do
+          contact = Hubspotter::Contact.create({
+              first_name: 'Test',
+              last_name: 'Person',
+              email: 'totallynewuser@example.com' })
+          expect(contact['canonical-vid']).to eq 231258
+        end
+      end
+
+      context "duplicate user" do
+        let(:contact) do
+          Hubspotter::Contact.create({ email: 'test@example.com' })
+        end
+
+        it "raises HubspotError" do
+          VCR.use_cassette('contact-create-duplicate') do
+            expect{contact}.to raise_error(Hubspotter::HubspotError)
+          end
         end
       end
     end

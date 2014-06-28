@@ -15,7 +15,6 @@ taking your marketing to a new, if somewhat creepy, level.
 
 ## Todo
 
-* Contact.create
 * Contact.update
 * Form.create
 * Form.update

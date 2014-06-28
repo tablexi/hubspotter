@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.hubapi.com/contacts/v1/contact?hapikey=demo
+    body:
+      encoding: UTF-8
+      string: '{"properties":[{"property":"email","value":"test@example.com"}]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.hubapi.com
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'false'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Sat, 28 Jun 2014 22:47:32 GMT
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Content-Length:
+      - '279'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"status":"error","message":"{\"msg\":\"Contact already existed\",\"error\":\"CONTACT_EXISTS\",\"property\":{\"vid\":191287,\"identities\":[{\"type\":\"EMAIL\",\"value\":\"test@example.com\",\"timestamp\":1384776031196},{\"type\":\"LEAD_GUID\",\"value\":\"e30589ff-3be9-4e08-94f3-f9ffbdede84d\",\"timestamp\":1384776031262}]}}","requestId":"664d4823-53c5-4291-8697-5b2e65572a87"}'
+    http_version: 
+  recorded_at: Sat, 28 Jun 2014 22:47:05 GMT
+recorded_with: VCR 2.9.2
