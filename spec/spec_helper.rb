@@ -1,9 +1,12 @@
+require "vcr"
+require "Hubspotter"
+
 RSpec.configure do |config|
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
 
   if config.files_to_run.one?
-    config.default_formatter = 'doc'
+    config.default_formatter = "doc"
   end
 
   config.order = :random
@@ -17,4 +20,9 @@ RSpec.configure do |config|
     mocks.syntax = :expect
     mocks.verify_partial_doubles = true
   end
+end
+
+VCR.configure do |c|
+  c.cassette_library_dir = "fixtures/vcr_cassettes"
+  c.hook_into :webmock
 end
