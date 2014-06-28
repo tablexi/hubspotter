@@ -4,4 +4,5 @@ module Hubspotter
   class ConnectionError    < Error; end
   class InvalidPath        < Error; end
   class InvalidMethod      < Error; end
+  class HubspotError       < Error; end
 end
