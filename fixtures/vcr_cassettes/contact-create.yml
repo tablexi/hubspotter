@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.hubapi.com/contacts/v1/contact?hapikey=demo
     body:
       encoding: UTF-8
-      string: '{"properties":[{"property":"first_name","value":"Test"},{"property":"last_name","value":"Person"},{"property":"email","value":"totallynewuser@example.com"}]}'
+      string: '{"properties":[{"property":"email","value":"totallynewuser@example.com"}]}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -36,6 +36,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"vid":231258,"canonical-vid":231258,"merged-vids":[],"portal-id":62515,"is-contact":true,"profile-token":"AO_T-mMbRiue831K3MVWMsJN-BOfMU4t3AS3YA6UhroF1IXzXOYGqHtP2elbWbvbOmp3i2dXtooa5YXJPU7mSR4NpkpojeO7DIcWa1TWU6jjBSzX6VQa8PCHwLASRSIFqJAVWFfjlFqp","profile-url":"https://app.hubspot.com/contacts/62515/lists/public/contact/_AO_T-mMbRiue831K3MVWMsJN-BOfMU4t3AS3YA6UhroF1IXzXOYGqHtP2elbWbvbOmp3i2dXtooa5YXJPU7mSR4NpkpojeO7DIcWa1TWU6jjBSzX6VQa8PCHwLASRSIFqJAVWFfjlFqp/","properties":{"first_name":{"value":"Test","versions":[{"value":"Test","source-type":"API","source-id":null,"source-label":null,"timestamp":1403995214831,"selected":false}]},"email":{"value":"totallynewuser@example.com","versions":[{"value":"totallynewuser@example.com","source-type":"API","source-id":null,"source-label":null,"timestamp":1403995214831,"selected":false}]},"createdate":{"value":"1403995214831","versions":[{"value":"1403995214831","source-type":"API","source-id":null,"source-label":null,"timestamp":1403995214831,"selected":false}]},"last_name":{"value":"Person","versions":[{"value":"Person","source-type":"API","source-id":null,"source-label":null,"timestamp":1403995214831,"selected":false}]},"lifecyclestage":{"value":"subscriber","versions":[{"value":"subscriber","source-type":"API","source-id":null,"source-label":null,"timestamp":1403995214831,"selected":false}]}},"form-submissions":[],"list-memberships":[],"identity-profiles":[{"vid":231258,"identities":[{"type":"EMAIL","value":"totallynewuser@example.com","timestamp":1403995214831},{"type":"LEAD_GUID","value":"1ad6c189-b902-4879-95ed-0246a011cd5b","timestamp":1403995214846}]}],"merge-audits":[]}'
-    http_version: 
+    http_version:
   recorded_at: Sat, 28 Jun 2014 22:39:48 GMT
 recorded_with: VCR 2.9.2

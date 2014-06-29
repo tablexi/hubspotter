@@ -1,14 +1,9 @@
 require "spec_helper"
+require "foundries/contact_foundry"
 require "hubspotter/contact"
 require "hubspotter/exception"
 
 describe Hubspotter::Contact do
-  before(:all) do
-    Hubspotter.configure do |config|
-      config.api_key = 'demo'
-    end
-  end
-
   describe "class methods" do
     describe "#all" do
       let(:contacts) { Hubspotter::Contact.all }
@@ -23,17 +18,15 @@ describe Hubspotter::Contact do
     describe "#create" do
       it "creates a new contact" do
         VCR.use_cassette('contact-create') do
-          contact = Hubspotter::Contact.create({
-              first_name: 'Test',
-              last_name: 'Person',
-              email: 'totallynewuser@example.com' })
-          expect(contact['canonical-vid']).to eq 231258
+          contact = Hubspotter::Contact.create(
+            ContactFoundry.default_properties)
+          expect(contact['canonical-vid']).to eq ContactFoundry.default_vid
         end
       end
 
       context "duplicate user" do
         let(:contact) do
-          Hubspotter::Contact.create({ email: 'test@example.com' })
+          Hubspotter::Contact.create(ContactFoundry.duplicate_email_properties)
         end
 
         it "raises HubspotError" do
@@ -47,13 +40,13 @@ describe Hubspotter::Contact do
     describe "#update" do
       let(:contact) do
         Hubspotter::Contact.update(
-          231258,
-          { email: 'updateemail@example.com' })
+          ContactFoundry.default_vid,
+          ContactFoundry.default_properties({ email: 'updated@example.com' }))
       end
 
       it "updates properties" do
         VCR.use_cassette('contact-update') do
-          expect(contact.properties.email).to eq('updateemail@example.com')
+          expect(contact.properties.email).to eq('updated@example.com')
         end
       end
     end
