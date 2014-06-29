@@ -17,15 +17,24 @@ module Hubspotter
 
     def self.create(properties = {})
       path = BASE_PATH + "/contact"
+      create_or_update(path, properties)
+    end
+
+    def self.update(vid, properties = {} )
+      path = BASE_PATH + "/contact/vid/#{vid}/profile"
+      create_or_update(path, properties)
+    end
+
+
+    private
+
+    def self.create_or_update(path, properties)
       body = properties_hash_to_json(properties)
       request = Hubspotter::Request.new(path, :post, post_body: body)
       response = request.send
       raise_errors(response)
       new(response.data)
     end
-
-
-    private
 
     def self.deserialize_contacts(hashed_contacts)
       contacts = []

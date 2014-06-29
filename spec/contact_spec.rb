@@ -19,10 +19,8 @@ describe Hubspotter::Contact do
         end
       end
     end
-  end
 
-  describe "instance methods" do
-    describe ".create" do
+    describe "#create" do
       it "creates a new contact" do
         VCR.use_cassette('contact-create') do
           contact = Hubspotter::Contact.create({
@@ -42,6 +40,20 @@ describe Hubspotter::Contact do
           VCR.use_cassette('contact-create-duplicate') do
             expect{contact}.to raise_error(Hubspotter::HubspotError)
           end
+        end
+      end
+    end
+
+    describe "#update" do
+      let(:contact) do
+        Hubspotter::Contact.update(
+          231258,
+          { email: 'updateemail@example.com' })
+      end
+
+      it "updates properties" do
+        VCR.use_cassette('contact-update') do
+          expect(contact.properties.email).to eq('updateemail@example.com')
         end
       end
     end
