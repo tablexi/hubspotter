@@ -55,7 +55,7 @@ module Hubspotter
         raise InvalidPath
       when "405"
         raise InvalidMethod
-      when http_response.code.match(/^50\d$/)
+      when /^50\d$/
         raise ConnectionError
       end
     end

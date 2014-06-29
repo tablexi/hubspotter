@@ -1,18 +1,11 @@
 require "spec_helper"
+require "foundries/request_foundry"
 require "hubspotter/exception"
-require "hubspotter/request"
 
 describe Hubspotter::Request do
   describe "class method" do
     describe "#initialize" do
-
-      let(:request) do
-        Hubspotter::Request.new(
-          '/path',
-          :get,
-          url_params: { key: 'value' },
-          post_body: 'body')
-      end
+      let(:request){ RequestFoundry.default }
 
       it "sets path" do
         expect(request.path).to eq('/path')
@@ -33,9 +26,7 @@ describe Hubspotter::Request do
   end
 
   describe "instance method" do
-    let(:request) do
-      Hubspotter::Request.new("/contacts/v1/lists/all/contacts/all", :get)
-    end
+    let(:request){ RequestFoundry.get_contacts }
 
     describe ".send" do
       context "bad request" do
@@ -51,6 +42,13 @@ describe Hubspotter::Request do
           request.path = '/foo'
           VCR.use_cassette('request-invalid-path') do
             expect{request.send}.to raise_error(Hubspotter::InvalidPath)
+          end
+        end
+
+        it "raises ConnectionError" do
+          VCR.use_cassette('request-connection-error') do
+            request = RequestFoundry.update_contact
+            expect{request.send}.to raise_error(Hubspotter::ConnectionError)
           end
         end
       end
