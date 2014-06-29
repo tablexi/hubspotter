@@ -1,5 +1,3 @@
-require "hubspotter/contact"
-
 class ContactFoundry
     def self.default_properties(new_properties = {})
     { email: 'totallynewuser@example.com' }.merge(new_properties)
