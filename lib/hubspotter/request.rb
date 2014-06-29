@@ -10,6 +10,16 @@ module Hubspotter
 
     HOST = "https://api.hubapi.com"
 
+    # Create a new [Request].
+    #
+    # @param path [String] API URL path
+    # @param method [Symbol] get or post
+    # @option url_params [Hash] :url_params ({})
+    # @option post_body [String] :post_body (nil)
+    #
+    # @return [Request]
+    #
+    # @raise [InvalidMethod] if the method is not get or post
     def initialize(path, method, url_params: {}, post_body: nil)
       self.method = method
       @path       = path
@@ -17,6 +27,14 @@ module Hubspotter
       @post_body  = post_body
     end
 
+    # Submit a request to the API.
+    #
+    # @return [Response]
+    #
+    # @raise [InvalidMethod] if the API does not respond to the method
+    # @raise [InvalidPath] if the URL path is incorrect
+    # @raise [AuthorizationError] if your api_key is incorrect
+    # @raise [ConnectionError] if there is a problem connecting to the API
     def send
       http_response = get? ? request_get : request_post
       raise_errors(http_response)
