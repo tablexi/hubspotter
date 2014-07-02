@@ -1,6 +1,3 @@
-require "hashie"
-require "json"
-
 module Hubspotter
   class Response
     attr_accessor :data

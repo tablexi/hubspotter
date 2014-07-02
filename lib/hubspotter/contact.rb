@@ -1,7 +1,3 @@
-require "hashie"
-require "json"
-require "hubspotter/request"
-
 module Hubspotter
   class Contact
     BASE_PATH = "/contacts/v1"

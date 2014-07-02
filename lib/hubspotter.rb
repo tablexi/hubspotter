@@ -1,4 +1,12 @@
+require "hashie"
+require "json"
+require "net/http"
+require "uri"
+
 require "hubspotter/configuration"
+require "hubspotter/exception"
+require "hubspotter/request"
+require "hubspotter/response"
 require "hubspotter/version"
 
 module Hubspotter

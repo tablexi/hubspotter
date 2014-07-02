@@ -1,8 +1,3 @@
-require "net/http"
-require "uri"
-require "hubspotter/exception"
-require "hubspotter/response"
-
 module Hubspotter
   class Request
     attr_accessor :host, :method, :path, :post_body, :url_params

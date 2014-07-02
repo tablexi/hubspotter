@@ -1,8 +1,3 @@
-require "hashie"
-require "json"
-require "uri"
-require "hubspotter/request"
-
 module Hubspotter
   class Form
     BASE_PATH = "/forms/v1"
