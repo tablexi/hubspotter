@@ -1,5 +1,4 @@
 require "hashie"
-require "hashie"
 require "json"
 require "hubspotter/request"
 
