@@ -16,8 +16,8 @@ taking your marketing to a new, if somewhat creepy, level.
 ## Todo
 
 * Form.create
-* Form.update
 * Contact.all pagination support
+* Make error message handling less smart
 
 
 ## Installation

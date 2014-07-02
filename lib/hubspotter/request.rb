@@ -5,7 +5,7 @@ require "hubspotter/response"
 
 module Hubspotter
   class Request
-    attr_accessor :method, :path, :post_body, :url_params
+    attr_accessor :host, :method, :path, :post_body, :url_params
     attr_reader   :response
 
     HOST = "https://api.hubapi.com"
@@ -16,12 +16,14 @@ module Hubspotter
     # @param method [Symbol] get or post
     # @option url_params [Hash] :url_params ({})
     # @option post_body [String] :post_body (nil)
+    # @option host [String] :host (nil)
     #
     # @return [Request]
     #
     # @raise [InvalidMethod] if the method is not get or post
-    def initialize(path, method, url_params: {}, post_body: nil)
+    def initialize(path, method, url_params: {}, post_body: nil, host: nil)
       self.method = method
+      @host       = host
       @path       = path
       @url_params = url_params
       @post_body  = post_body
@@ -93,7 +95,7 @@ module Hubspotter
     end
 
     def uri(param_hash = nil)
-      uri = URI.parse(HOST + path)
+      uri = URI.parse((host || HOST) + path)
       uri.query = URI.encode_www_form(param_hash) if param_hash
       uri
     end

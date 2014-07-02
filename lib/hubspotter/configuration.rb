@@ -1,6 +1,6 @@
 module Hubspotter
   class Configuration
-    attr_accessor :api_key, :http_open_timeout, :http_read_timeout
+    attr_accessor :api_key, :http_open_timeout, :http_read_timeout, :portal_id
 
     def initialize
       @api_key           = 'demo'
