@@ -19,11 +19,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.5"
-  spec.add_development_dependency "hashie"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency "hashie",  "~> 3.1"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "vcr"
-  spec.add_development_dependency "webmock"
-  spec.add_development_dependency "yard"
+  spec.add_development_dependency "rspec",   "~> 3.0"
+  spec.add_development_dependency "vcr",     "~> 2.9"
+  spec.add_development_dependency "webmock", "~> 1.18"
 end
