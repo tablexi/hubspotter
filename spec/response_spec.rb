@@ -21,7 +21,7 @@ describe Hubspotter::Response do
 
     it "returns a error string" do
       VCR.use_cassette('response-create-error') do
-        expect(response.error).to eq("Contact already existed; CONTACT_EXISTS")
+        expect(response.error_message).to match(/CONTACT_EXISTS/)
       end
     end
   end

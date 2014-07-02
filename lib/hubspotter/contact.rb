@@ -90,7 +90,7 @@ module Hubspotter
       return if response.success?
       case response.code
       when '409'
-        raise HubspotError, response.error
+        raise HubspotError, response.error_message
       end
     end
   end

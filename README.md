@@ -17,7 +17,6 @@ taking your marketing to a new, if somewhat creepy, level.
 
 * Form.create
 * Contact.all pagination support
-* Make error message handling less smart
 
 
 ## Installation
